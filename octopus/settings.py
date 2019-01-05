@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tornado_websockets',
+    'bootstrap3',
+    'word_cloud.apps.WordCloudConfig',
 ]
 
 MIDDLEWARE = [
