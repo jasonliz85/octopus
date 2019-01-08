@@ -130,3 +130,4 @@ TORNADO = {
     'settings': {},  # {} by default
 }
 
+os.environ['PYTHONHASHSEED'] = '0'

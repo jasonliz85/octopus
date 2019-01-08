@@ -15,8 +15,8 @@
                     <canvas id="wordcloud_canvas" class="col-sm-6" height="300" width="300" ></canvas>
                     <div id="wordcloud_keywords" class="col-sm-6">
                       <table class="table">
-                        {% for word, count in top_100 %}
-                            <tr><td>{{ word }}</td><td>{{ count }}</td></tr>
+                        {% for word, frequency in top_100 %}
+                            <tr><td>{{ word }}</td><td>{{ frequency }}</td></tr>
                         {% endfor %}
                       </table>
                     </div>
