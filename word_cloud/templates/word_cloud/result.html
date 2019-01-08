@@ -1,9 +1,0 @@
-<h1>Results for your website: {{website}} </h1>
-
-<div id="wordcloud_keywords" class="{{ keywords_div_class }}">
-    <table class="{{ keywords_table_class }}">
-        {% for word, count in top_100 %}
-            <tr><td>{{ word }}</td><td>{{ count }}</td></tr>
-        {% endfor %}
-    </table>
-</div>

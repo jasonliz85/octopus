@@ -1,0 +1,33 @@
+{% load static %}
+<div id="word_cloud_app">
+    <form action="{% url 'wordcloud' %}" method="post" >
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.target_url }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="container-fluid">
+      <div class="row">
+        {% if request.method == 'POST' %}
+            <div id="wordcloud_tag">
+                {% if top_100 %}
+                    <canvas id="wordcloud_canvas" class="col-sm-6" height="300" width="300" ></canvas>
+                    <div id="wordcloud_keywords" class="col-sm-6">
+                      <table class="table">
+                        {% for word, count in top_100 %}
+                            <tr><td>{{ word }}</td><td>{{ count }}</td></tr>
+                        {% endfor %}
+                      </table>
+                    </div>
+                    <script src="{% static 'js/wordcloud2.js' %}"></script>
+                    <script>
+                        var wordcloud_list = { list: {{ normalised_top_100|safe}}};
+                        WordCloud(document.getElementById('wordcloud_canvas'), wordcloud_list );
+                    </script>
+                {% endif %}
+            </div>
+        {% endif %}
+      </div>
+    </div>
+</div>
