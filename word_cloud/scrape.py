@@ -19,7 +19,7 @@ def get_words_from_website(url, tags_to_check=None):
 
     ## Build word counter
     total_words  = Counter()
-    escape_chars = punctuation + '–'
+    escape_chars = punctuation + '–’'
     
     for tag in tags_to_check: 
         ## scrape tags

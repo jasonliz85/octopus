@@ -4,6 +4,7 @@ from .models import Word
 from django import forms
 from django.core.validators import URLValidator
 
+TOP_WORDS = 100
 
 class SubmitForm(forms.Form):
     target_url = forms.URLField(
@@ -16,8 +17,9 @@ class SubmitForm(forms.Form):
 def process_results(url):
     results = {}
     total_words = get_words_from_website(url, ['p', 'div'])
-    results.update(top_100 = total_words.most_common(100))
-    results.update(normalised_top_100 = normalise_results(total_words.most_common(100)))
+    results.update(top_100 = total_words.most_common(TOP_WORDS))
+    results.update(normalised_top_100 =
+    normalise_results(total_words.most_common(TOP_WORDS)))
     return results
 
 def wordcloud(request):
