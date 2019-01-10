@@ -1,33 +1,31 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_messages %}
 {% load static %}
-<div id="word_cloud_app">
+<div class="word_cloud_app">
     <form action="{% url 'wordcloud' %}" method="post" >
         {% csrf_token %}
-        <div class="form-group">
-            {{ form.target_url }}
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary"> Submit </button>
+        {% endbuttons %}
     </form>
-    <div class="container-fluid">
-      <div class="row">
-        {% if request.method == 'POST' %}
-            <div id="wordcloud_tag">
-                {% if top_100 %}
-                    <canvas id="wordcloud_canvas" class="col-sm-6" height="300" width="300" ></canvas>
-                    <div id="wordcloud_keywords" class="col-sm-6">
-                      <table class="table">
-                        {% for word, frequency in top_100 %}
-                            <tr><td>{{ word }}</td><td>{{ frequency }}</td></tr>
-                        {% endfor %}
-                      </table>
-                    </div>
-                    <script src="{% static 'js/wordcloud2.js' %}"></script>
-                    <script>
-                        var wordcloud_list = { list: {{ normalised_top_100|safe}}};
-                        WordCloud(document.getElementById('wordcloud_canvas'), wordcloud_list );
-                    </script>
-                {% endif %}
-            </div>
-        {% endif %}
-      </div>
-    </div>
+</div>
+<div class="word_cloud_results">
+    {% if request.method == 'POST' and top_100 %}
+        <div id="wordcloud_keywords" class="col-sm-6">
+          <canvas id="wordcloud_canvas" height="300" width="300" ></canvas>
+          <table class="table">
+            <tr><th>Word</th><th>Frequency</th></tr>
+            {% for word, frequency in top_100 %}
+                <tr><td>{{ word }}</td><td>{{ frequency }}</td></tr>
+            {% endfor %}
+          </table>
+        </div>
+        <script src="{% static 'js/wordcloud2.js' %}"></script>
+        <script>
+            var wordcloud_list = { list: {{ normalised_top_100|safe}}};
+            WordCloud(document.getElementById('wordcloud_canvas'), wordcloud_list );
+        </script>
+    {% endif %}
 </div>

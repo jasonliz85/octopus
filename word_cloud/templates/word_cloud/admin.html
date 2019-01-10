@@ -1,16 +1,20 @@
-<div id="word_cloud_app">
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_messages %}
+<div class="word_cloud_results">
+    <h1> Word Cloud Histogram </h1>
     <div class="word_histrogram">
-        <h1> Word Cloud Histogram </h1>
         <div id="wordcloud_table" class="col-sm-6">
           {% if not histrogram %}
             <table class="table">
+              <tr><th>Word</th><th>Frequency</th></tr>
               {% for word, frequency in histogram %}
                   <tr><td>{{ word }}</td><td>{{ frequency }}</td></tr>
               {% endfor %}
             </table>
           {% else %}
-          {% endif %}
             <p> No Results </p>
+          {% endif %}
         </div>
     </div>
 </div>

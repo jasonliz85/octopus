@@ -39,6 +39,9 @@ def get_words_from_website(url, tags_to_check=None):
     return total_words
 
 def normalise_results(counter, max_size=30, min_size=10):
+    ## This function is needed for the js font sizes i.e. the font 
+    ##  size will be proportional to the most occuring and least 
+    ##  occuring frequencies
     if not counter:
         return []
     min_val = counter[-1][1]
